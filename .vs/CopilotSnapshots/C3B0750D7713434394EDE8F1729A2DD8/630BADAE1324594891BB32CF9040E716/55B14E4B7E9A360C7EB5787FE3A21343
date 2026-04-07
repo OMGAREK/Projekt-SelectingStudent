@@ -1,0 +1,421 @@
+﻿using System.Collections.ObjectModel;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.IO;
+using System.Linq;
+using System.Runtime.CompilerServices;
+using Microsoft.Maui.Storage;
+using Project_SelectingStudents.Models;
+
+namespace Project_SelectingStudents.ViewModels
+{
+    public class MainViewModel : INotifyPropertyChanged
+    {
+        private readonly string _classesFile = Path.Combine(FileSystem.AppDataDirectory, "classes.txt");
+        private readonly string _studentsFile = Path.Combine(FileSystem.AppDataDirectory, "students.txt");
+        private readonly Random _rng = new Random();
+
+        public ObservableCollection<ClassModel> Classes { get; } = new ObservableCollection<ClassModel>();
+        public ObservableCollection<StudentModel> Students { get; } = new ObservableCollection<StudentModel>();
+
+        private string _newClassName = string.Empty;
+        public string NewClassName
+        {
+            get => _newClassName;
+            set
+            {
+                if (_newClassName != value)
+                {
+                    _newClassName = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+
+        private string _newStudentName = string.Empty;
+        public string NewStudentName
+        {
+            get => _newStudentName;
+            set
+            {
+                if (_newStudentName != value)
+                {
+                    _newStudentName = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+
+        private ClassModel? _selectedClass;
+        public ClassModel? SelectedClass
+        {
+            get => _selectedClass;
+            set
+            {
+                if (!Equals(_selectedClass, value))
+                {
+                    _selectedClass = value;
+                    OnPropertyChanged();
+                    LoadStudents();
+                }
+            }
+        }
+
+        private string _result = string.Empty;
+        public string Result
+        {
+            get => _result;
+            set
+            {
+                if (_result != value)
+                {
+                    _result = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+
+        private string _luckyResult = string.Empty;
+        public string LuckyResult
+        {
+            get => _luckyResult;
+            set
+            {
+                if (_luckyResult != value)
+                {
+                    _luckyResult = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+
+        public MainViewModel()
+        {
+            EnsureFilesExist();
+            ClearLuckyNumbers();
+            LoadClasses();
+        }
+
+        public void LoadClasses()
+        {
+            string? selectedName = SelectedClass?.Name;
+
+            HashSet<string> classNames = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
+
+            if (File.Exists(_classesFile))
+            {
+                foreach (string line in File.ReadAllLines(_classesFile))
+                {
+                    string name = (line ?? string.Empty).Trim();
+                    if (!string.IsNullOrWhiteSpace(name))
+                    {
+                        classNames.Add(name);
+                    }
+                }
+            }
+
+            foreach (StudentModel s in ReadAllStudents())
+            {
+                if (!string.IsNullOrWhiteSpace(s.ClassName))
+                {
+                    classNames.Add(s.ClassName.Trim());
+                }
+            }
+
+            Classes.Clear();
+            foreach (string name in classNames.OrderBy(n => n))
+            {
+                Classes.Add(new ClassModel { Name = name });
+            }
+
+            if (!string.IsNullOrWhiteSpace(selectedName))
+            {
+                SelectedClass = Classes.FirstOrDefault(c => string.Equals(c.Name, selectedName, StringComparison.OrdinalIgnoreCase));
+            }
+        }
+
+        public void CreateClass()
+        {
+            string name = (NewClassName ?? string.Empty).Trim();
+            if (string.IsNullOrWhiteSpace(name)) return;
+
+            EnsureFilesExist();
+
+            HashSet<string> existing = new HashSet<string>(
+                File.ReadAllLines(_classesFile)
+                    .Select(l => (l ?? string.Empty).Trim())
+                    .Where(l => !string.IsNullOrWhiteSpace(l)),
+                StringComparer.OrdinalIgnoreCase);
+
+            if (existing.Add(name))
+            {
+                File.AppendAllText(_classesFile, name + Environment.NewLine);
+            }
+
+            NewClassName = string.Empty;
+            LoadClasses();
+        }
+
+        public void DeleteSelectedClass()
+        {
+            if (SelectedClass == null || string.IsNullOrWhiteSpace(SelectedClass.Name)) return;
+
+            string className = SelectedClass.Name;
+
+            List<StudentModel> remaining = ReadAllStudents()
+                .Where(s => !string.Equals(s.ClassName, className, StringComparison.OrdinalIgnoreCase))
+                .ToList();
+            SaveAllStudents(remaining);
+
+            if (File.Exists(_classesFile))
+            {
+                List<string> lines = File.ReadAllLines(_classesFile)
+                    .Select(l => (l ?? string.Empty).Trim())
+                    .Where(l => !string.IsNullOrWhiteSpace(l) && !string.Equals(l, className, StringComparison.OrdinalIgnoreCase))
+                    .ToList();
+                File.WriteAllLines(_classesFile, lines);
+            }
+
+            SelectedClass = null;
+            Students.Clear();
+            LoadClasses();
+        }
+
+        public void LoadStudents()
+        {
+            Students.Clear();
+
+            if (SelectedClass == null || string.IsNullOrWhiteSpace(SelectedClass.Name)) return;
+
+            foreach (StudentModel s in ReadAllStudents()
+                .Where(s => string.Equals(s.ClassName, SelectedClass.Name, StringComparison.OrdinalIgnoreCase))
+                .OrderBy(s => s.Id))
+            {
+                Students.Add(s);
+            }
+        }
+
+        public void AddStudent()
+        {
+            if (SelectedClass == null || string.IsNullOrWhiteSpace(SelectedClass.Name)) return;
+
+            string name = (NewStudentName ?? string.Empty).Trim();
+            if (string.IsNullOrWhiteSpace(name)) return;
+
+            string className = SelectedClass.Name;
+
+            List<StudentModel> all = ReadAllStudents();
+            int nextId = all
+                .Where(s => string.Equals(s.ClassName, className, StringComparison.OrdinalIgnoreCase))
+                .Select(s => s.Id)
+                .DefaultIfEmpty(0)
+                .Max() + 1;
+
+            all.Add(new StudentModel
+            {
+                ClassName = className,
+                Id = nextId,
+                Name = name,
+                IsPresent = true,
+                HasLuckyNumber = false
+            });
+
+            SaveAllStudents(all);
+            NewStudentName = string.Empty;
+            LoadStudents();
+        }
+
+        public void SaveStudents()
+        {
+            if (SelectedClass == null || string.IsNullOrWhiteSpace(SelectedClass.Name)) return;
+
+            List<StudentModel> all = ReadAllStudents();
+
+            foreach (StudentModel s in Students)
+            {
+                StudentModel? existing = all.FirstOrDefault(x =>
+                    string.Equals(x.ClassName, s.ClassName, StringComparison.OrdinalIgnoreCase) && x.Id == s.Id);
+
+                if (existing == null)
+                {
+                    all.Add(new StudentModel
+                    {
+                        ClassName = s.ClassName,
+                        Id = s.Id,
+                        Name = (s.Name ?? string.Empty).Trim(),
+                        IsPresent = s.IsPresent,
+                        HasLuckyNumber = s.HasLuckyNumber
+                    });
+                }
+                else
+                {
+                    existing.Name = (s.Name ?? string.Empty).Trim();
+                    existing.IsPresent = s.IsPresent;
+                    existing.HasLuckyNumber = s.HasLuckyNumber;
+                }
+            }
+
+            SaveAllStudents(all);
+        }
+
+        public void DrawStudent()
+        {
+            Result = string.Empty;
+
+            if (SelectedClass == null || string.IsNullOrWhiteSpace(SelectedClass.Name)) return;
+
+            List<StudentModel> classStudents = Students.Count > 0
+                ? Students.ToList()
+                : ReadAllStudents().Where(s => string.Equals(s.ClassName, SelectedClass.Name, StringComparison.OrdinalIgnoreCase)).ToList();
+
+            List<StudentModel> eligible = classStudents.Where(s => s.IsPresent && !s.HasLuckyNumber).ToList();
+            if (eligible.Count == 0)
+            {
+                eligible = classStudents.Where(s => s.IsPresent).ToList();
+            }
+
+            if (eligible.Count == 0)
+            {
+                Result = "No students available";
+                return;
+            }
+
+            Result = eligible[_rng.Next(eligible.Count)].Name;
+        }
+
+        public void AssignLucky()
+        {
+            List<StudentModel> allStudents = ReadAllStudents();
+
+            if (allStudents.Count == 0)
+            {
+                LuckyResult = "Brak uczniów do wylosowania";
+                return;
+            }
+
+            string? largestClassName = allStudents
+                .Where(s => !string.IsNullOrWhiteSpace(s.ClassName))
+                .GroupBy(s => s.ClassName.Trim(), StringComparer.OrdinalIgnoreCase)
+                .OrderByDescending(g => g.Count())
+                .Select(g => g.Key)
+                .FirstOrDefault();
+
+            if (string.IsNullOrWhiteSpace(largestClassName))
+            {
+                LuckyResult = "Brak uczniów do wylosowania";
+                return;
+            }
+
+            List<StudentModel> classStudentsForLucky = allStudents
+                .Where(s => string.Equals(s.ClassName, largestClassName, StringComparison.OrdinalIgnoreCase))
+                .ToList();
+
+            List<StudentModel> eligible = classStudentsForLucky.Where(s => s.IsPresent && !s.HasLuckyNumber).ToList();
+            if (eligible.Count == 0)
+            {
+                eligible = classStudentsForLucky.Where(s => s.IsPresent).ToList();
+            }
+
+            if (eligible.Count == 0)
+            {
+                LuckyResult = "Brak uczniów do wylosowania";
+                return;
+            }
+
+            int luckyId = eligible[_rng.Next(eligible.Count)].Id;
+
+            foreach (StudentModel s in allStudents)
+            {
+                s.HasLuckyNumber = (s.Id == luckyId);
+            }
+
+            SaveAllStudents(allStudents);
+
+            if (SelectedClass != null && !string.IsNullOrWhiteSpace(SelectedClass.Name))
+            {
+                LoadStudents();
+            }
+
+            LuckyResult = $"Szczęśliwy numerek: {luckyId}";
+        }
+
+        private void EnsureFilesExist()
+        {
+            if (!File.Exists(_classesFile))
+            {
+                File.WriteAllText(_classesFile, string.Empty);
+            }
+
+            if (!File.Exists(_studentsFile))
+            {
+                File.WriteAllText(_studentsFile, string.Empty);
+            }
+        }
+
+        private List<StudentModel> ReadAllStudents()
+        {
+            EnsureFilesExist();
+            List<StudentModel> students = new List<StudentModel>();
+
+            foreach (string line in File.ReadAllLines(_studentsFile))
+            {
+                if (string.IsNullOrWhiteSpace(line)) continue;
+
+                string[] parts = line.Split('|');
+                if (parts.Length < 5) continue;
+
+                if (!int.TryParse(parts[1], out int id)) continue;
+                if (!bool.TryParse(parts[3], out bool isPresent)) continue;
+                if (!bool.TryParse(parts[4], out bool hasLucky)) continue;
+
+                students.Add(new StudentModel
+                {
+                    ClassName = parts[0].Trim(),
+                    Id = id,
+                    Name = parts[2].Trim(),
+                    IsPresent = isPresent,
+                    HasLuckyNumber = hasLucky
+                });
+            }
+
+            return students;
+        }
+
+        private void SaveAllStudents(List<StudentModel> students)
+        {
+            EnsureFilesExist();
+
+            List<string> lines = new List<string>();
+            foreach (StudentModel s in students)
+            {
+                lines.Add($"{s.ClassName}|{s.Id}|{s.Name}|{s.IsPresent}|{s.HasLuckyNumber}");
+            }
+            File.WriteAllLines(_studentsFile, lines);
+        }
+
+        private void ClearLuckyNumbers()
+        {
+            List<StudentModel> all = ReadAllStudents();
+
+            bool changed = false;
+            foreach (StudentModel s in all)
+            {
+                if (s.HasLuckyNumber)
+                {
+                    s.HasLuckyNumber = false;
+                    changed = true;
+                }
+            }
+
+            if (changed)
+            {
+                SaveAllStudents(all);
+            }
+        }
+
+        public event PropertyChangedEventHandler? PropertyChanged;
+
+        protected void OnPropertyChanged([CallerMemberName] string propertyName = "") =>
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+    }
+}

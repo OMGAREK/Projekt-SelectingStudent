@@ -1,0 +1,27 @@
+﻿using System.ComponentModel;
+using System.Runtime.CompilerServices;
+using Project_SelectingStudents.Models;
+using Project_SelectingStudents.ViewModels;
+
+namespace Project_SelectingStudents.ViewModels
+{
+    public class MainViewModel : INotifyPropertyChanged
+    {
+        private readonly MainModel _mainModel = new MainModel();
+
+        public ClassViewModel ClassVM { get; }
+
+        public StudentViewModel StudentVM { get; }
+
+        public MainViewModel()
+        {
+            ClassVM = new ClassViewModel(_mainModel.ClassModel);
+            StudentVM = new StudentViewModel(_mainModel.StudentModel);
+        }
+
+        public event PropertyChangedEventHandler? PropertyChanged;
+
+        protected void OnPropertyChanged([CallerMemberName] string propertyName = "") =>
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+    }
+}

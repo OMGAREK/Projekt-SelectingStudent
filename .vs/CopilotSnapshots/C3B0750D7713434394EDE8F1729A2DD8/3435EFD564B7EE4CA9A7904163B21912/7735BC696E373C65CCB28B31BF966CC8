@@ -1,0 +1,60 @@
+﻿using Microsoft.Maui.Controls;
+using Project_SelectingStudents.ViewModels;
+using Project_SelectingStudents.Models;
+using System;
+
+namespace Project_SelectingStudents.Views
+{
+    public partial class MainPage : ContentPage
+    {
+        private readonly MainViewModel _vm = new MainViewModel();
+
+        public MainPage()
+        {
+            InitializeComponent();
+            BindingContext = _vm;
+        }
+
+        private void OnCreateClassClicked(object sender, EventArgs e)
+        {
+            string name = NewClassEntry.Text ?? string.Empty;
+            _vm.ClassVM.NewClassName = name;
+            _vm.ClassVM.Create();
+            NewClassEntry.Text = string.Empty;
+        }
+
+        private void OnAddStudentClicked(object sender, EventArgs e)
+        {
+            string name = (FindByName("NewStudentEntry") as Entry)?.Text ?? string.Empty;
+            _vm.StudentVM.NewStudentName = name;
+            _vm.StudentVM.AddStudent();
+            (FindByName("NewStudentEntry") as Entry).Text = string.Empty;
+        }
+
+        private void OnSaveClicked(object sender, EventArgs e)
+        {
+            foreach (StudentModel.Student student in _vm.StudentVM.Students)
+            {
+                _vm.StudentVM.SaveStudent(student);
+            }
+        }
+
+        private void OnDeleteClicked(object sender, EventArgs e)
+        {
+            if (string.IsNullOrWhiteSpace(_vm.StudentVM.SelectedClass)) return;
+
+            _vm.ClassVM.Delete(_vm.StudentVM.SelectedClass);
+            _vm.StudentVM.SelectedClass = string.Empty;
+        }
+
+        private void OnDrawClicked(object sender, EventArgs e)
+        {
+            _vm.StudentVM.DrawStudent();
+        }
+
+        private void OnAssignLuckyClicked(object sender, EventArgs e)
+        {
+            _vm.StudentVM.AssignLucky();
+        }
+    }
+}

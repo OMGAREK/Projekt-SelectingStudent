@@ -1,0 +1,138 @@
+﻿using System.Collections.ObjectModel;
+using Project_SelectingStudents.Models;
+using System.ComponentModel;
+using System.Runtime.CompilerServices;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System;
+
+namespace Project_SelectingStudents.ViewModels
+{
+    public class StudentViewModel : INotifyPropertyChanged
+    {
+        private readonly StudentModel _model;
+        public ObservableCollection<StudentModel.Student> Students { get; } = new ObservableCollection<StudentModel.Student>();
+
+        private string _newStudentName = string.Empty;
+        public string NewStudentName
+        {
+            get => _newStudentName;
+            set
+            {
+                if (_newStudentName != value)
+                {
+                    _newStudentName = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+
+        private string _selectedClass = string.Empty;
+        public string SelectedClass
+        {
+            get => _selectedClass;
+            set
+            {
+                if (_selectedClass != value)
+                {
+                    _selectedClass = value;
+                    LoadStudents();
+                    OnPropertyChanged();
+                }
+            }
+        }
+
+        private string _result = string.Empty;
+        public string Result
+        {
+            get => _result;
+            set
+            {
+                if (_result != value)
+                {
+                    _result = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+
+        private string _luckyResult = string.Empty;
+        public string LuckyResult
+        {
+            get => _luckyResult;
+            set
+            {
+                if (_luckyResult != value)
+                {
+                    _luckyResult = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+
+        public StudentViewModel(StudentModel model)
+        {
+            _model = model;
+        }
+
+        public void LoadStudents()
+        {
+            Students.Clear();
+
+            if (string.IsNullOrWhiteSpace(SelectedClass)) return;
+
+            List<StudentModel.Student> list = _model.GetStudents(SelectedClass);
+
+            foreach (StudentModel.Student s in list)
+            {
+                Students.Add(s);
+            }
+        }
+
+        public void AddStudent()
+        {
+            if (string.IsNullOrWhiteSpace(NewStudentName) || string.IsNullOrWhiteSpace(SelectedClass)) return;
+
+            _model.AddStudent(SelectedClass, NewStudentName);
+
+            LoadStudents();
+
+            NewStudentName = string.Empty;
+        }
+
+        public void SaveStudent(StudentModel.Student student)
+        {
+            _model.SaveStudent(student);
+        }
+
+        public void DrawStudent()
+        {
+            if (string.IsNullOrWhiteSpace(SelectedClass)) return;
+            Result = _model.DrawStudent(SelectedClass);
+        }
+
+        public void AssignLucky()
+        {
+            int luckyId = _model.SelectLuckyNumber();
+            if (luckyId < 0)
+            {
+                LuckyResult = "Brak uczniów do wylosowania";
+                return;
+            }
+
+            _model.AssignLuckyNumber(luckyId);
+
+            if (!string.IsNullOrWhiteSpace(SelectedClass))
+            {
+                LoadStudents();
+            }
+
+            LuckyResult = $"Szczęśliwy numerek: {luckyId}";
+        }
+
+        public event PropertyChangedEventHandler? PropertyChanged;
+
+        protected void OnPropertyChanged([CallerMemberName] string name = "") =>
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
+    }
+}

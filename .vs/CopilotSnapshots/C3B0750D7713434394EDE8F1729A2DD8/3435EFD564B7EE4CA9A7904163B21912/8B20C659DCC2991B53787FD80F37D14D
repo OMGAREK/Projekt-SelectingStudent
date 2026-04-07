@@ -1,0 +1,11 @@
+﻿using System.Collections.Generic;
+
+namespace Project_SelectingStudents.Models
+{
+    public class MainModel
+    {
+        public ClassModel ClassModel { get; } = new ClassModel();
+
+        public StudentModel StudentModel { get; } = new StudentModel();
+    }
+}

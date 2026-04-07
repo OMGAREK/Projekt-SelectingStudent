@@ -1,0 +1,11 @@
+﻿namespace Project_SelectingStudents.Models
+{
+    public class StudentModel
+    {
+        public string ClassName { get; set; } = string.Empty;
+        public int Id { get; set; }
+        public string Name { get; set; } = string.Empty;
+        public bool IsPresent { get; set; } = true;
+        public bool HasLuckyNumber { get; set; } = false;
+    }
+}

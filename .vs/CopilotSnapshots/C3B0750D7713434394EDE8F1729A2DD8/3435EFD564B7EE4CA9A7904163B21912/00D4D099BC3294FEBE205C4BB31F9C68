@@ -1,0 +1,69 @@
+﻿using System.Collections.ObjectModel;
+using Project_SelectingStudents.Models;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Runtime.CompilerServices;
+
+namespace Project_SelectingStudents.ViewModels
+{
+    public class ClassViewModel : INotifyPropertyChanged
+    {
+        private readonly ClassModel _model;
+        public ObservableCollection<string> Classes { get; } = new ObservableCollection<string>();
+
+        private string _newClassName = string.Empty;
+        public string NewClassName
+        {
+            get => _newClassName;
+            set
+            {
+                if (_newClassName != value)
+                {
+                    _newClassName = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+
+        public ClassViewModel(ClassModel model)
+        {
+            _model = model;
+            Load();
+        }
+
+        public void Load()
+        {
+            Classes.Clear();
+
+            foreach (string name in _model.GetClasses())
+            {
+                Classes.Add(name);
+            }
+        }
+
+        public void Create()
+        {
+            if (string.IsNullOrWhiteSpace(NewClassName)) return;
+
+            _model.CreateClass(NewClassName.Trim());
+
+            Load();
+
+            NewClassName = string.Empty;
+        }
+
+        public void Delete(string className)
+        {
+            if (string.IsNullOrWhiteSpace(className)) return;
+
+            _model.DeleteClass(className);
+
+            Load();
+        }
+
+        public event PropertyChangedEventHandler? PropertyChanged;
+
+        protected void OnPropertyChanged([CallerMemberName] string name = "") =>
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
+    }
+}

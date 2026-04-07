@@ -1,0 +1,218 @@
+﻿using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using System.ComponentModel;
+using System.Runtime.CompilerServices;
+
+namespace Project_SelectingStudents.Models
+{
+    public class StudentModel
+    {
+        private readonly string _dataFile = Path.Combine(FileSystem.AppDataDirectory, "students.txt");
+
+        public StudentModel()
+        {
+            EnsureFileExists();
+        }
+
+        private void EnsureFileExists()
+        {
+            if (!File.Exists(_dataFile))
+            {
+                File.WriteAllText(_dataFile, string.Empty);
+            }
+        }
+
+        public List<Student> GetStudents(string className)
+        {
+            return GetAllStudents().Where(s => s.ClassName == className).ToList();
+        }
+
+        public void AddStudent(string className, string name)
+        {
+            if (string.IsNullOrWhiteSpace(className) || string.IsNullOrWhiteSpace(name)) return;
+
+            List<Student> students = GetAllStudents();
+            int nextId = students.Where(s => s.ClassName == className).Max(s => (int?)s.Id) ?? 0;
+            nextId++;
+
+            students.Add(new Student
+            {
+                ClassName = className,
+                Id = nextId,
+                Name = name.Trim(),
+                IsPresent = true,
+                HasLuckyNumber = false
+            });
+
+            SaveAllStudents(students);
+        }
+
+        public void SaveStudent(Student student)
+        {
+            List<Student> students = GetAllStudents();
+            Student existing = students.FirstOrDefault(s => s.ClassName == student.ClassName && s.Id == student.Id);
+            if (existing != null)
+            {
+                existing.Name = student.Name;
+                existing.IsPresent = student.IsPresent;
+                existing.HasLuckyNumber = student.HasLuckyNumber;
+            }
+            SaveAllStudents(students);
+        }
+
+        public void AssignLuckyNumber(int luckyId)
+        {
+            List<Student> students = GetAllStudents();
+            foreach (Student s in students)
+            {
+                s.HasLuckyNumber = (s.Id == luckyId);
+            }
+            SaveAllStudents(students);
+        }
+
+        public void ClearLuckyNumbers()
+        {
+            List<Student> students = GetAllStudents();
+            foreach (Student s in students)
+            {
+                s.HasLuckyNumber = false;
+            }
+            SaveAllStudents(students);
+        }
+
+        public string DrawStudent(string className)
+        {
+            List<Student> students = GetStudents(className);
+            List<Student> eligible = students.Where(s => s.IsPresent && !s.HasLuckyNumber).ToList();
+
+            if (eligible.Count == 0)
+            {
+                eligible = students.Where(s => s.IsPresent).ToList();
+            }
+
+            if (eligible.Count == 0) return "No students available";
+
+            System.Random rng = new System.Random();
+            return eligible[rng.Next(eligible.Count)].Name;
+        }
+
+        public int SelectLuckyNumber()
+        {
+            List<Student> allStudents = GetAllStudents();
+
+            if (allStudents.Count == 0) return -1;
+
+            List<string> classNames = new List<string>();
+            foreach (Student student in allStudents)
+            {
+                if (string.IsNullOrWhiteSpace(student.ClassName)) continue;
+
+                if (!classNames.Contains(student.ClassName))
+                {
+                    classNames.Add(student.ClassName);
+                }
+            }
+
+            if (classNames.Count == 0) return -1;
+
+            string largestClassName = string.Empty;
+            int largestCount = 0;
+            foreach (string className in classNames)
+            {
+                int count = 0;
+                foreach (Student student in allStudents)
+                {
+                    if (student.ClassName == className)
+                    {
+                        count++;
+                    }
+                }
+
+                if (count > largestCount)
+                {
+                    largestCount = count;
+                    largestClassName = className;
+                }
+            }
+
+            if (largestCount == 0 || string.IsNullOrWhiteSpace(largestClassName)) return -1;
+
+            List<Student> classStudentsForLucky = new List<Student>();
+            foreach (Student student in allStudents)
+            {
+                if (student.ClassName == largestClassName)
+                {
+                    classStudentsForLucky.Add(student);
+                }
+            }
+
+            List<Student> eligible = classStudentsForLucky.Where(s => s.IsPresent && !s.HasLuckyNumber).ToList();
+            if (eligible.Count == 0)
+            {
+                eligible = classStudentsForLucky.Where(s => s.IsPresent).ToList();
+            }
+
+            if (eligible.Count == 0) return -1;
+
+            System.Random rng = new System.Random();
+            return eligible[rng.Next(eligible.Count)].Id;
+        }
+
+        public List<Student> GetAllStudentsPublic() => GetAllStudents();
+
+        private List<Student> GetAllStudents()
+        {
+            List<Student> students = new List<Student>();
+            if (!File.Exists(_dataFile)) return students;
+
+            string[] lines = File.ReadAllLines(_dataFile);
+            foreach (string line in lines)
+            {
+                if (string.IsNullOrWhiteSpace(line)) continue;
+                string[] parts = line.Split('|');
+                if (parts.Length < 5) continue;
+
+                if (int.TryParse(parts[1], out int id) &&
+                    bool.TryParse(parts[3], out bool isPresent) &&
+                    bool.TryParse(parts[4], out bool hasLucky))
+                {
+                    students.Add(new Student
+                    {
+                        ClassName = parts[0].Trim(),
+                        Id = id,
+                        Name = parts[2].Trim(),
+                        IsPresent = isPresent,
+                        HasLuckyNumber = hasLucky
+                    });
+                }
+            }
+            return students;
+        }
+
+        private void SaveAllStudents(List<Student> students)
+        {
+            List<string> lines = new List<string>();
+            foreach (Student s in students)
+            {
+                lines.Add($"{s.ClassName}|{s.Id}|{s.Name}|{s.IsPresent}|{s.HasLuckyNumber}");
+            }
+            File.WriteAllLines(_dataFile, lines);
+        }
+
+        public void DeleteStudentsInClass(string className)
+        {
+            List<Student> remaining = GetAllStudents().Where(s => s.ClassName != className).ToList();
+            SaveAllStudents(remaining);
+        }
+
+        public class Student
+        {
+            public string ClassName { get; set; } = string.Empty;
+            public int Id { get; set; }
+            public string Name { get; set; } = string.Empty;
+            public bool IsPresent { get; set; } = true;
+            public bool HasLuckyNumber { get; set; } = false;
+        }
+    }
+}

@@ -1,0 +1,77 @@
+﻿using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+
+namespace Project_SelectingStudents.Models
+{
+    public class ClassModel
+    {
+        private readonly string _classesFile = Path.Combine(FileSystem.AppDataDirectory, "classes.txt");
+        private readonly StudentModel _studentModel = new StudentModel();
+
+        public ClassModel()
+        {
+            EnsureFileExists();
+        }
+
+        private void EnsureFileExists()
+        {
+            if (!File.Exists(_classesFile))
+            {
+                File.WriteAllText(_classesFile, string.Empty);
+            }
+        }
+
+        public List<string> GetClasses()
+        {
+            List<string> classes = new List<string>();
+
+            if (File.Exists(_classesFile))
+            {
+                foreach (string line in File.ReadAllLines(_classesFile))
+                {
+                    if (!string.IsNullOrWhiteSpace(line) && !classes.Contains(line))
+                    {
+                        classes.Add(line);
+                    }
+                }
+            }
+
+            foreach (StudentModel.Student student in _studentModel.GetAllStudentsPublic())
+            {
+                if (!classes.Contains(student.ClassName))
+                {
+                    classes.Add(student.ClassName);
+                }
+            }
+
+            return classes;
+        }
+
+        public void CreateClass(string className)
+        {
+            if (string.IsNullOrWhiteSpace(className)) return;
+
+            if (!GetClasses().Contains(className))
+            {
+                File.AppendAllText(_classesFile, className + Environment.NewLine);
+            }
+        }
+
+        public void DeleteClass(string className)
+        {
+            if (string.IsNullOrWhiteSpace(className)) return;
+
+            _studentModel.DeleteStudentsInClass(className);
+
+            if (File.Exists(_classesFile))
+            {
+                List<string> lines = File.ReadAllLines(_classesFile)
+                    .Where(line => string.IsNullOrWhiteSpace(line) || line.Trim() != className)
+                    .ToList();
+
+                File.WriteAllLines(_classesFile, lines);
+            }
+        }
+    }
+}

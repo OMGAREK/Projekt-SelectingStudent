@@ -1,0 +1,17 @@
+﻿using Project_SelectingStudents.Models;
+
+namespace Project_SelectingStudents
+{
+    public partial class App : Application
+    {
+        public App()
+        {
+            InitializeComponent();
+
+            StudentModel studentModel = new StudentModel();
+            studentModel.ClearLuckyNumbers();
+
+            MainPage = new AppShell();
+        }
+    }
+}

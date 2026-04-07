@@ -1,0 +1,276 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\arkad\\source\\repos\\Projekt-SelectingStudent\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{20E58716-770E-483F-BE00-254DA771692E}|Project-SelectingStudents\\Project-SelectingStudents.csproj|c:\\users\\arkad\\source\\repos\\projekt-selectingstudent\\project-selectingstudents\\views\\mainpage.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{20E58716-770E-483F-BE00-254DA771692E}|Project-SelectingStudents\\Project-SelectingStudents.csproj|solutionrelative:project-selectingstudents\\views\\mainpage.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{20E58716-770E-483F-BE00-254DA771692E}|Project-SelectingStudents\\Project-SelectingStudents.csproj|c:\\users\\arkad\\source\\repos\\projekt-selectingstudent\\project-selectingstudents\\viewmodels\\mainviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{20E58716-770E-483F-BE00-254DA771692E}|Project-SelectingStudents\\Project-SelectingStudents.csproj|solutionrelative:project-selectingstudents\\viewmodels\\mainviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{20E58716-770E-483F-BE00-254DA771692E}|Project-SelectingStudents\\Project-SelectingStudents.csproj|c:\\users\\arkad\\source\\repos\\projekt-selectingstudent\\project-selectingstudents\\models\\studentmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{20E58716-770E-483F-BE00-254DA771692E}|Project-SelectingStudents\\Project-SelectingStudents.csproj|solutionrelative:project-selectingstudents\\models\\studentmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{20E58716-770E-483F-BE00-254DA771692E}|Project-SelectingStudents\\Project-SelectingStudents.csproj|c:\\users\\arkad\\source\\repos\\projekt-selectingstudent\\project-selectingstudents\\appshell.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{20E58716-770E-483F-BE00-254DA771692E}|Project-SelectingStudents\\Project-SelectingStudents.csproj|solutionrelative:project-selectingstudents\\appshell.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{20E58716-770E-483F-BE00-254DA771692E}|Project-SelectingStudents\\Project-SelectingStudents.csproj|c:\\users\\arkad\\source\\repos\\projekt-selectingstudent\\project-selectingstudents\\models\\mainmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{20E58716-770E-483F-BE00-254DA771692E}|Project-SelectingStudents\\Project-SelectingStudents.csproj|solutionrelative:project-selectingstudents\\models\\mainmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{20E58716-770E-483F-BE00-254DA771692E}|Project-SelectingStudents\\Project-SelectingStudents.csproj|c:\\users\\arkad\\source\\repos\\projekt-selectingstudent\\project-selectingstudents\\models\\classmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{20E58716-770E-483F-BE00-254DA771692E}|Project-SelectingStudents\\Project-SelectingStudents.csproj|solutionrelative:project-selectingstudents\\models\\classmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{20E58716-770E-483F-BE00-254DA771692E}|Project-SelectingStudents\\Project-SelectingStudents.csproj|c:\\users\\arkad\\source\\repos\\projekt-selectingstudent\\project-selectingstudents\\resources\\styles\\styles.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}",
+      "RelativeMoniker": "D:0:0:{20E58716-770E-483F-BE00-254DA771692E}|Project-SelectingStudents\\Project-SelectingStudents.csproj|solutionrelative:project-selectingstudents\\resources\\styles\\styles.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{20E58716-770E-483F-BE00-254DA771692E}|Project-SelectingStudents\\Project-SelectingStudents.csproj|c:\\users\\arkad\\source\\repos\\projekt-selectingstudent\\project-selectingstudents\\resources\\styles\\styles.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{20E58716-770E-483F-BE00-254DA771692E}|Project-SelectingStudents\\Project-SelectingStudents.csproj|solutionrelative:project-selectingstudents\\resources\\styles\\styles.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{20E58716-770E-483F-BE00-254DA771692E}|Project-SelectingStudents\\Project-SelectingStudents.csproj|c:\\users\\arkad\\source\\repos\\projekt-selectingstudent\\project-selectingstudents\\app.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{20E58716-770E-483F-BE00-254DA771692E}|Project-SelectingStudents\\Project-SelectingStudents.csproj|solutionrelative:project-selectingstudents\\app.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{20E58716-770E-483F-BE00-254DA771692E}|Project-SelectingStudents\\Project-SelectingStudents.csproj|c:\\users\\arkad\\source\\repos\\projekt-selectingstudent\\project-selectingstudents\\views\\mainpage.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{20E58716-770E-483F-BE00-254DA771692E}|Project-SelectingStudents\\Project-SelectingStudents.csproj|solutionrelative:project-selectingstudents\\views\\mainpage.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{20E58716-770E-483F-BE00-254DA771692E}|Project-SelectingStudents\\Project-SelectingStudents.csproj|c:\\users\\arkad\\source\\repos\\projekt-selectingstudent\\project-selectingstudents\\project-selectingstudents.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
+      "RelativeMoniker": "D:0:0:{20E58716-770E-483F-BE00-254DA771692E}|Project-SelectingStudents\\Project-SelectingStudents.csproj|solutionrelative:project-selectingstudents\\project-selectingstudents.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 1,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedHeight": 200,
+          "SelectedChildIndex": 21,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{3ae79031-e1bc-11d0-8f78-00a0c9110057}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{1c64b9c2-e352-428e-a56d-0ace190b99a6}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{1c4feeaa-4718-4aa9-859d-94ce25d182ba}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{d78612c7-9962-4b83-95d9-268046dad23a}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{b1e99781-ab81-11d0-b683-00aa00a3ee26}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{eefa5220-e298-11d0-8f78-00a0c9110057}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{e506b91c-c606-466a-90a9-123d1d1e12b3}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:128:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{57d563b6-44a5-47df-85be-f4199ad6b651}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:128:0:{13b12e3e-c1b4-4539-9371-4fe9a0d523fc}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{34e76e81-ee4a-11d0-ae2e-00a0c90fffc3}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:128:0:{75188d03-9892-4ae2-abf1-207126247ce5}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:129:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:85371364:0:{bf84ea66-d821-4dba-b1b1-2777d8574775}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:129:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:128:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "Styles.xaml",
+              "DocumentMoniker": "C:\\Users\\arkad\\source\\repos\\Projekt-SelectingStudent\\Project-SelectingStudents\\Resources\\Styles\\Styles.xaml",
+              "RelativeDocumentMoniker": "Project-SelectingStudents\\Resources\\Styles\\Styles.xaml",
+              "ToolTip": "C:\\Users\\arkad\\source\\repos\\Projekt-SelectingStudent\\Project-SelectingStudents\\Resources\\Styles\\Styles.xaml",
+              "RelativeToolTip": "Project-SelectingStudents\\Resources\\Styles\\Styles.xaml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2026-04-07T09:06:38.789Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "AppShell.xaml",
+              "DocumentMoniker": "C:\\Users\\arkad\\source\\repos\\Projekt-SelectingStudent\\Project-SelectingStudents\\AppShell.xaml",
+              "RelativeDocumentMoniker": "Project-SelectingStudents\\AppShell.xaml",
+              "ToolTip": "C:\\Users\\arkad\\source\\repos\\Projekt-SelectingStudent\\Project-SelectingStudents\\AppShell.xaml",
+              "RelativeToolTip": "Project-SelectingStudents\\AppShell.xaml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAAnAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2026-04-07T09:05:22.715Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "Styles.css",
+              "DocumentMoniker": "C:\\Users\\arkad\\source\\repos\\Projekt-SelectingStudent\\Project-SelectingStudents\\Resources\\Styles\\Styles.css",
+              "RelativeDocumentMoniker": "Project-SelectingStudents\\Resources\\Styles\\Styles.css",
+              "ToolTip": "C:\\Users\\arkad\\source\\repos\\Projekt-SelectingStudent\\Project-SelectingStudents\\Resources\\Styles\\Styles.css",
+              "RelativeToolTip": "Project-SelectingStudents\\Resources\\Styles\\Styles.css",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAARAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003000|",
+              "WhenOpened": "2026-04-07T08:37:49.89Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "App.xaml.cs",
+              "DocumentMoniker": "C:\\Users\\arkad\\source\\repos\\Projekt-SelectingStudent\\Project-SelectingStudents\\App.xaml.cs",
+              "RelativeDocumentMoniker": "Project-SelectingStudents\\App.xaml.cs",
+              "ToolTip": "C:\\Users\\arkad\\source\\repos\\Projekt-SelectingStudent\\Project-SelectingStudents\\App.xaml.cs",
+              "RelativeToolTip": "Project-SelectingStudents\\App.xaml.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-06T08:48:01.687Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "MainPage.xaml.cs",
+              "DocumentMoniker": "C:\\Users\\arkad\\source\\repos\\Projekt-SelectingStudent\\Project-SelectingStudents\\Views\\MainPage.xaml.cs",
+              "RelativeDocumentMoniker": "Project-SelectingStudents\\Views\\MainPage.xaml.cs",
+              "ToolTip": "C:\\Users\\arkad\\source\\repos\\Projekt-SelectingStudent\\Project-SelectingStudents\\Views\\MainPage.xaml.cs",
+              "RelativeToolTip": "Project-SelectingStudents\\Views\\MainPage.xaml.cs",
+              "ViewState": "AgIAABgAAAAAAAAAAAA5wAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-06T08:47:57.185Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "MainPage.xaml",
+              "DocumentMoniker": "C:\\Users\\arkad\\source\\repos\\Projekt-SelectingStudent\\Project-SelectingStudents\\Views\\MainPage.xaml",
+              "RelativeDocumentMoniker": "Project-SelectingStudents\\Views\\MainPage.xaml",
+              "ToolTip": "C:\\Users\\arkad\\source\\repos\\Projekt-SelectingStudent\\Project-SelectingStudents\\Views\\MainPage.xaml*",
+              "RelativeToolTip": "Project-SelectingStudents\\Views\\MainPage.xaml*",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAEMAAAARAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2026-04-06T08:47:49.431Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "MainViewModel.cs",
+              "DocumentMoniker": "C:\\Users\\arkad\\source\\repos\\Projekt-SelectingStudent\\Project-SelectingStudents\\ViewModels\\MainViewModel.cs",
+              "RelativeDocumentMoniker": "Project-SelectingStudents\\ViewModels\\MainViewModel.cs",
+              "ToolTip": "C:\\Users\\arkad\\source\\repos\\Projekt-SelectingStudent\\Project-SelectingStudents\\ViewModels\\MainViewModel.cs*",
+              "RelativeToolTip": "Project-SelectingStudents\\ViewModels\\MainViewModel.cs*",
+              "ViewState": "AgIAALkBAAAAAAAAAAAcwFkBAAA0AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-06T08:47:26.576Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "MainModel.cs",
+              "DocumentMoniker": "C:\\Users\\arkad\\source\\repos\\Projekt-SelectingStudent\\Project-SelectingStudents\\Models\\MainModel.cs",
+              "RelativeDocumentMoniker": "Project-SelectingStudents\\Models\\MainModel.cs",
+              "ToolTip": "C:\\Users\\arkad\\source\\repos\\Projekt-SelectingStudent\\Project-SelectingStudents\\Models\\MainModel.cs",
+              "RelativeToolTip": "Project-SelectingStudents\\Models\\MainModel.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-06T08:46:52.472Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "StudentModel.cs",
+              "DocumentMoniker": "C:\\Users\\arkad\\source\\repos\\Projekt-SelectingStudent\\Project-SelectingStudents\\Models\\StudentModel.cs",
+              "RelativeDocumentMoniker": "Project-SelectingStudents\\Models\\StudentModel.cs",
+              "ToolTip": "C:\\Users\\arkad\\source\\repos\\Projekt-SelectingStudent\\Project-SelectingStudents\\Models\\StudentModel.cs*",
+              "RelativeToolTip": "Project-SelectingStudents\\Models\\StudentModel.cs*",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-06T08:46:48.257Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "Project-SelectingStudents.csproj",
+              "DocumentMoniker": "C:\\Users\\arkad\\Source\\Repos\\Projekt-SelectingStudent\\Project-SelectingStudents\\Project-SelectingStudents.csproj",
+              "RelativeDocumentMoniker": "Project-SelectingStudents\\Project-SelectingStudents.csproj",
+              "ToolTip": "C:\\Users\\arkad\\Source\\Repos\\Projekt-SelectingStudent\\Project-SelectingStudents\\Project-SelectingStudents.csproj",
+              "RelativeToolTip": "Project-SelectingStudents\\Project-SelectingStudents.csproj",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
+              "WhenOpened": "2026-04-06T08:41:02.123Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "ClassModel.cs",
+              "DocumentMoniker": "C:\\Users\\arkad\\source\\repos\\Projekt-SelectingStudent\\Project-SelectingStudents\\Models\\ClassModel.cs",
+              "RelativeDocumentMoniker": "Project-SelectingStudents\\Models\\ClassModel.cs",
+              "ToolTip": "C:\\Users\\arkad\\source\\repos\\Projekt-SelectingStudent\\Project-SelectingStudents\\Models\\ClassModel.cs",
+              "RelativeToolTip": "Project-SelectingStudents\\Models\\ClassModel.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-03-31T16:42:43.308Z",
+              "EditorCaption": ""
+            }
+          ]
+        },
+        {
+          "DockedHeight": 200,
+          "SelectedChildIndex": -1,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{c9c0ae26-aa77-11d2-b3f0-0000f87570ee}"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

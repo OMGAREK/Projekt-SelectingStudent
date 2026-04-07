@@ -1,0 +1,70 @@
+ContentPage {
+    background-color: #F0F2F5;
+}
+
+Label {
+    font-family: OpenSansRegular;
+    font-size: 14;
+    color: #0B2B5E;
+}
+
+.title {
+    color: #0B2B5E;
+    font-size: 28;
+    font-attributes: bold;
+}
+
+Label.section-title {
+    color: #0B2B5E;
+    font-size: 20;
+    font-attributes: bold;
+}
+
+Frame {
+    background-color: #FFFFFF;
+    border-color: #D0D5DD;
+    corner-radius: 10;
+    padding: 14;
+}
+
+Button {
+    background-color: #0B2B5E;
+    color: #FFFFFF;
+    font-family: OpenSansRegular;
+    font-size: 14;
+    corner-radius: 8;
+    minimum-height-request: 44;
+    minimum-width-request: 44;
+}
+
+Entry {
+    color: #0B2B5E;
+    font-family: OpenSansRegular;
+    font-size: 14;
+    background-color: #FFFFFF;
+    minimum-height-request: 44;
+}
+
+Picker {
+    color: #0B2B5E;
+    font-family: OpenSansRegular;
+    font-size: 14;
+    background-color: #FFFFFF;
+    minimum-height-request: 44;
+}
+
+CheckBox {
+    color: #0B2B5E;
+    minimum-height-request: 44;
+    minimum-width-request: 44;
+}
+
+CollectionView {
+    background-color: transparent;
+}
+
+Label.result-text {
+    color: #0B2B5E;
+    font-size: 24;
+    font-attributes: bold;
+}
